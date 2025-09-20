@@ -167,15 +167,32 @@ class USTACaptainAnalyzer:
             'Closed', 'Currently', 'playing', 'If', 'a', 'problem', 'exists', 'Red',
             'Rostered', 'Individual', 'Won', 'Scheduled', 'Day', 'Match', 'date', 'time',
             'Standings', 'Rules', 'Newsletters', 'Availability', 'Coordinator', 'Print',
-            'Blank', 'Score', 'Card', 'Mountain', 'View', 'San', 'Jose', 'Santa', 'Clara',
-            'Sunnyvale', 'Fremont', 'Palo', 'Alto', 'Cupertino', 'San', 'Mateo', 'Antioch',
-            'San', 'Francisco', 'Campbell', 'Los', 'Gatos', 'Milpitas', 'Portola', 'Valley',
-            'Stanford', 'South', 'San', 'Francisco', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri',
-            'Sat', 'Sun'
+            'Blank', 'Score', 'Card', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'
+        ]
+        
+        # Common city names and locations in Northern California
+        city_names = [
+            'Mountain', 'View', 'San', 'Jose', 'Santa', 'Clara', 'Sunnyvale', 'Fremont',
+            'Palo', 'Alto', 'Cupertino', 'San', 'Mateo', 'Antioch', 'San', 'Francisco',
+            'Campbell', 'Los', 'Gatos', 'Milpitas', 'Portola', 'Valley', 'Stanford',
+            'South', 'San', 'Francisco', 'Dublin', 'Pleasanton', 'Hayward', 'Union',
+            'City', 'Newark', 'Fremont', 'Livermore', 'Tracy', 'Manteca', 'Stockton',
+            'Modesto', 'Turlock', 'Merced', 'Fresno', 'Bakersfield', 'Sacramento',
+            'Davis', 'Vacaville', 'Fairfield', 'Vallejo', 'Richmond', 'Berkeley',
+            'Oakland', 'Alameda', 'San', 'Leandro', 'Castro', 'Valley', 'Redwood',
+            'City', 'Menlo', 'Park', 'Atherton', 'Woodside', 'Hillsborough', 'Burlingame',
+            'San', 'Carlos', 'Belmont', 'San', 'Mateo', 'Foster', 'City', 'Redwood',
+            'Shores', 'East', 'Palo', 'Alto', 'Los', 'Altos', 'Saratoga', 'Monte',
+            'Sereno', 'Los', 'Gatos', 'Campbell', 'San', 'Jose', 'Santa', 'Clara',
+            'Sunnyvale', 'Mountain', 'View', 'Palo', 'Alto', 'Menlo', 'Park'
         ]
         
         # Check if any skip keyword is in the text
         if any(keyword.lower() in text.lower() for keyword in skip_keywords):
+            return False
+        
+        # Check if it's a city name
+        if any(city.lower() in text.lower() for city in city_names):
             return False
         
         # Skip if it's all uppercase (likely headers or labels)
